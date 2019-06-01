@@ -20,7 +20,6 @@ export default class App extends Component {
 
    time12 = (time) => {
        const hours = parseInt(time.slice(16, 18));
-       console.log(hours);
        const minutes_seconds = time.slice(18, 24);
        const dayTime = hours < 12 ? "AM" : "PM";
        return `${ hours % 12 }${ minutes_seconds } ${ dayTime }`
