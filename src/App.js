@@ -14,6 +14,18 @@ export default class App extends Component {
        this.setState({mode: event.target.value});
    };
 
+   time24 = (time) => {
+       return time.slice(16, 24);
+   };
+
+   time12 = (time) => {
+       const hours = parseInt(time.slice(16, 18));
+       console.log(hours);
+       const minutes_seconds = time.slice(18, 24);
+       const dayTime = hours < 12 ? "AM" : "PM";
+       return `${ hours % 12 }${ minutes_seconds } ${ dayTime }`
+   };
+
    componentDidMount() {
        this.updateTime();
        this.interval = setInterval(this.updateTime, 1000);
@@ -25,10 +37,11 @@ export default class App extends Component {
 
     render () {
       const {time, mode} = this.state;
+      const formattedTime = mode === '24_hours' ? this.time24(time) :  this.time12(time);
+
       return (
           <div>
-              <h1>Project 1</h1>
-              <h3>{time}</h3>
+              <h3>{formattedTime}</h3>
               <form>
                   <label>
                       <input onChange={this.changeMode} type="radio" name="mode" value="24_hours" checked = {mode==="24_hours"}/> 24
@@ -37,7 +50,6 @@ export default class App extends Component {
                       <input onChange={this.changeMode} type="radio" name="mode" value="12_hours" checked = {mode==="12_hours"}/> 12
                   </label>
               </form>
-
           </div>
       )
   }
