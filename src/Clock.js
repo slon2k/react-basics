@@ -40,6 +40,7 @@ export default class Clock extends Component {
 
         return (
             <div>
+                <h2>Digital clock</h2>
                 <h3>{formattedTime}</h3>
                 <form>
                     <label>
