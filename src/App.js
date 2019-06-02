@@ -1,6 +1,7 @@
 import React from 'react';
 import Clock from './Clock';
 import PasswordGenerator from './PasswordGenerator'
+import Rating from './Rating'
 
 const App =  () => {
     return (
@@ -9,6 +10,8 @@ const App =  () => {
             <Clock/>
             <hr/>
             <PasswordGenerator/>
+            <hr/>
+            <Rating/>
 
         </div>
     )
