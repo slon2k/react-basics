@@ -1,11 +1,20 @@
 import React from 'react';
+import Clock from './Clock';
+import PasswordGenerator from './PasswordGenerator'
+import Rating from './Rating'
 
-function App() {
-  return (
-    <div>
-      Hello React!
-    </div>
-  );
-}
+const App =  () => {
+    return (
+        <div>
+            <h1>React Basics</h1>
+            <Clock/>
+            <hr/>
+            <PasswordGenerator/>
+            <hr/>
+            <Rating/>
 
-export default App;
+        </div>
+    )
+};
+
+export default App
