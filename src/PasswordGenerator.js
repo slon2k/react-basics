@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import Range from './Range'
+import Checkbox from './Checkbox'
 
 export default class PasswordGenerator extends Component {
 
@@ -11,25 +13,6 @@ export default class PasswordGenerator extends Component {
             Uppercase: {name: "Uppercase", checked: false, readonly: false, charSet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"},
             Symbols: {name: "Symbols", checked: false, readonly: false, charSet: "!#$%&()*+,-./:;<=>?@[]^_{|}~"},
         }
-    }
-
-    createRange() {
-        const {length} = this.state;
-        return(
-            <div key = {"length"}>
-                <label>
-                    Length
-                    <input
-                        onChange = {this.changeLength}
-                        type="Range"
-                        value={length}
-                        min="6"
-                        max="12"/>
-                </label>
-                {length}
-                <br/>
-            </div>
-        )
     }
 
     changeLength = (event) => {this.setState({length: event.target.value})}
@@ -49,12 +32,11 @@ export default class PasswordGenerator extends Component {
 
     generatePassword = (event) => {
         const {sets, length} = this.state;
+        const newPass = [];
         const charSet = Object.values(sets)
             .filter((item) => {return item.checked})
             .map((item) => {return item.charSet})
             .join('');
-
-        let newPass = [''];
 
         for (let i = 0; i < length; i++) {
             newPass.push(this.getRandomSymbol(charSet));
@@ -70,14 +52,10 @@ export default class PasswordGenerator extends Component {
             return(
                 <div key={item.name}>
                     <label>
-                        <input
-                            onChange = {() => this.toggleSet(item.name)}
-                            type="checkbox"
-                            name={item.name}
-                            checked={item.checked}
-                            readOnly={item.readonly}/>
+                        <Checkbox onChange={()=>{this.toggleSet(item.name)}} name={item.name} checked={item.checked} readonly={item.readonly}/>
                         {item.name}
                     </label>
+
                     <br/>
                 </div>
             )
@@ -85,7 +63,7 @@ export default class PasswordGenerator extends Component {
     }
 
     render() {
-        const {pass, sets} = this.state;
+        const {pass, length, sets} = this.state;
         const fields = this.createFields(sets);
 
         return(
@@ -95,12 +73,13 @@ export default class PasswordGenerator extends Component {
                 <div>
                     <input type="text" readOnly={true} value={pass}/>
                 </div>
-                {this.createRange()}
-
+                <Range value={length} onChange={this.changeLength} min={6} max={12}/>
                 <form>
                     {fields}
                     <button onClick={this.generatePassword}>Generate</button>
                 </form>
+                <Checkbox onChange={()=>{this.toggleSet("Symbols")}} name={"Symbols"} checked={this.state.sets["Symbols"].checked} readonly={false}/>
+
             </div>
         )
     }
