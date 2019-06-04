@@ -23,8 +23,11 @@ export default class Clock extends Component {
     }
 
     time12 = (time) => {
-        const dayTime = time.getHours() < 12 ? "AM" : "PM";
-        return `${time.getHours()%12}:${this.toTwoDigits(time.getMinutes())}:${this.toTwoDigits(time.getSeconds())} ${dayTime}`;
+        let hours = time.getHours();
+        const dayTime = hours < 12 ? "AM" : "PM";
+        hours = hours % 12;
+        hours = hours > 0 ? hours : 12;
+        return `${hours}:${this.toTwoDigits(time.getMinutes())}:${this.toTwoDigits(time.getSeconds())} ${dayTime}`;
     }
 
     componentDidMount() {

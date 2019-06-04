@@ -47,24 +47,22 @@ export default class PasswordGenerator extends Component {
         event.preventDefault();
     };
 
-    createFields(sets) {
-        return Object.values(sets).map((item) => {
+    render() {
+        const {pass, length, sets} = this.state;
+        const fields = Object.values(sets).map((item) => {
             return(
                 <div key={item.name}>
                     <label>
-                        <Checkbox onChange={()=>{this.toggleSet(item.name)}} name={item.name} checked={item.checked} readonly={item.readonly}/>
-                        {item.name}
+                        <Checkbox
+                            onChange={()=>{this.toggleSet(item.name)}}
+                            name={item.name}
+                            checked={item.checked}
+                            readonly={item.readonly}/>
                     </label>
-
                     <br/>
                 </div>
             )
-        })
-    }
-
-    render() {
-        const {pass, length, sets} = this.state;
-        const fields = this.createFields(sets);
+        });
 
         return(
             <div>
@@ -73,12 +71,14 @@ export default class PasswordGenerator extends Component {
                 <div>
                     <input type="text" readOnly={true} value={pass}/>
                 </div>
-                <Range value={length} onChange={this.changeLength} min={6} max={12}/>
+                <Range value={length}
+                       onChange={this.changeLength}
+                       min={6}
+                       max={12}/>
                 <form>
                     {fields}
                     <button onClick={this.generatePassword}>Generate</button>
                 </form>
-                <Checkbox onChange={()=>{this.toggleSet("Symbols")}} name={"Symbols"} checked={this.state.sets["Symbols"].checked} readonly={false}/>
 
             </div>
         )
