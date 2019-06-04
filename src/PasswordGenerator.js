@@ -57,7 +57,8 @@ export default class PasswordGenerator extends Component {
                             onChange={()=>{this.toggleSet(item.name)}}
                             name={item.name}
                             checked={item.checked}
-                            readonly={item.readonly}/>
+                            readonly={item.readonly}
+                        />
                     </label>
                     <br/>
                 </div>
@@ -71,10 +72,12 @@ export default class PasswordGenerator extends Component {
                 <div>
                     <input type="text" readOnly={true} value={pass}/>
                 </div>
-                <Range value={length}
-                       onChange={this.changeLength}
-                       min={6}
-                       max={12}/>
+                <Range
+                    value={length}
+                    onChange={this.changeLength}
+                    min={6}
+                    max={12}
+                />
                 <form>
                     {fields}
                     <button onClick={this.generatePassword}>Generate</button>
