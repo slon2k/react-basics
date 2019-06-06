@@ -3,9 +3,12 @@ import React, {Component} from 'react'
 export default class Rating extends Component {
     state = {rating: 0}
 
-    handleClick(index) {
+    handleClick = (event) => {
         const {rating} = this.state;
-        index === rating ? this.setState({rating: index - 1}) : this.setState({rating: index})
+        const index = event.target.dataset.rating;
+        if (index !== undefined) {
+            index === rating ? this.setState({rating: index - 1}) : this.setState({rating: index})
+        }
     }
 
     render() {
@@ -19,14 +22,14 @@ export default class Rating extends Component {
 
         const starList = stars.map((item, index) => {
             return(
-                <span onClick={() => this.handleClick(index + 1)} key={index} style={{cursor: "pointer"}}>
+                <span key={index + 1} data-rating={index + 1} style={{cursor: "pointer"}}>
                     {  index + 1 > rating ? '☆' : '★' }
                 </span>
             )
         });
 
         return (
-            <div>
+            <div onClick = {this.handleClick}>
                 {starList}
             </div>
         )
