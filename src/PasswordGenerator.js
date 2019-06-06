@@ -57,7 +57,7 @@ export default class PasswordGenerator extends Component {
                             onChange={()=>{this.toggleSet(item.name)}}
                             name={item.name}
                             checked={item.checked}
-                            readonly={item.readonly}
+                            readOnly={item.readonly}
                         />
                     </label>
                     <br/>

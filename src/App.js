@@ -1,7 +1,7 @@
 import React from 'react';
 import Clock from './Clock';
 import PasswordGenerator from './PasswordGenerator'
-import Rating from './Rating'
+import Rating from './NewRating'
 
 const App =  () => {
     return (
