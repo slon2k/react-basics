@@ -11,7 +11,7 @@ const App =  () => {
             <hr/>
             <PasswordGenerator/>
             <hr/>
-            <Rating/>
+            <Rating max={5}/>
 
         </div>
     )

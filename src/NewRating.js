@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 
 export default class Rating extends Component {
-
     state = {rating: 0}
 
     handleClick(index) {
@@ -11,9 +10,10 @@ export default class Rating extends Component {
 
     render() {
         const {rating} = this.state;
+        const {max} = this.props;
         const stars = [];
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < max; i++) {
             stars.push('')
         }
 
